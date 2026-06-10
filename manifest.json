@@ -2,8 +2,9 @@
   "manifest_version": 3,
   "name": "Tabs & Windows Function Tester",
   "version": "1.0.0",
-  "description": "Testbench for chrome.tabs / chrome.windows actions: open/navigate/activate/move/close tabs and windows.",
-  "permissions": ["tabs"],
+  "description": "Testbench for chrome.tabs / chrome.windows actions and every extension page type.",
+  "permissions": ["tabs", "sidePanel"],
+  "host_permissions": ["http://*/*", "https://*/*"],
   "background": {
     "service_worker": "background.js"
   },
@@ -11,5 +12,28 @@
   "action": {
     "default_title": "Tabs & Windows Tester",
     "default_popup": "popup.html"
-  }
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "devtools_page": "devtools.html",
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "sandbox": {
+    "pages": ["sandbox.html"]
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["sandbox.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }

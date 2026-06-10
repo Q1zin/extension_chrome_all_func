@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8" /><title>Sandbox</title></head>
+<body>
+  <script>
+    // Sandbox-страница: загружается с уникальным origin, без доступа к chrome.* API
+    // и вне CSP расширения (можно eval). Общается с host'ом через postMessage.
+    window.addEventListener("message", (e) => {
+      let result;
+      try {
+        // eslint-disable-next-line no-eval
+        result = eval(e.data.expr);
+      } catch (err) {
+        result = "Ошибка: " + err.message;
+      }
+      e.source.postMessage({ id: e.data.id, result }, e.origin);
+    });
+  </script>
+</body>
+</html>

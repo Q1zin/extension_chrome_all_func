@@ -128,6 +128,39 @@ const actions = {
     await chrome.windows.remove(tab.windowId);
     log("windows.remove → windowId", tab.windowId);
   },
+
+  // ── Страницы расширения ──────────────────────────────────────────────────
+  async "page.options"() {
+    await chrome.runtime.openOptionsPage();
+    log("options → openOptionsPage");
+  },
+
+  async "page.newtab"() {
+    await chrome.tabs.create({ url: chrome.runtime.getURL("newtab.html") });
+    log("newtab открыт явно (или просто открой новую вкладку)");
+  },
+
+  async "page.bookmarks"() {
+    await chrome.tabs.create({ url: chrome.runtime.getURL("bookmarks.html") });
+    log("bookmarks.html открыт");
+  },
+
+  async "page.history"() {
+    await chrome.tabs.create({ url: chrome.runtime.getURL("history.html") });
+    log("history.html открыт");
+  },
+
+  async "page.sandbox"() {
+    await chrome.tabs.create({ url: chrome.runtime.getURL("sandbox-host.html") });
+    log("sandbox-host.html открыт");
+  },
+
+  async "page.sidepanel"() {
+    const tab = await activeTab();
+    // sidePanel.open требует жеста пользователя — клик по кнопке подходит.
+    await chrome.sidePanel.open({ windowId: tab.windowId });
+    log("side panel открыт для windowId", tab.windowId);
+  },
 };
 
 document.querySelectorAll("button[data-action]").forEach((btn) => {

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Custom Bookmarks Page</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; max-width: 560px; margin: 40px auto; padding: 0 16px; color: #222; }
+    h1 { font-size: 20px; }
+    code { background: #f0f0f0; padding: 1px 5px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>Bookmarks (обычная страница)</h1>
+  <p>
+    Override-страница на расширение может быть только одна, и она занята
+    <code>newtab</code>. Поэтому это просто HTML-страница расширения,
+    открываемая через <code>chrome.tabs.create</code>.
+  </p>
+  <p>
+    Чтобы сделать её настоящим override менеджера закладок — поставь в манифесте
+    <code>chrome_url_overrides.bookmarks</code> вместо <code>newtab</code>.
+  </p>
+</body>
+</html>

@@ -23,9 +23,31 @@ Chrome-расширение (Manifest V3) — стенд для тестиров
 | `on_extension_update_window` | `chrome.windows.update` (focus / state / bounds) |
 | `on_extension_close_window` | `chrome.windows.remove` |
 
+## Типы страниц расширения
+
+| Тип | Файл(ы) | Как проверить |
+|---|---|---|
+| Popup | `popup.html` | клик по иконке |
+| Options | `options.html` | кнопка «options» / правый клик по иконке → Options |
+| Side panel | `sidepanel.html` | кнопка «side panel» (`chrome.sidePanel.open`) |
+| New Tab override | `newtab.html` | открыть новую вкладку (Ctrl/Cmd+T) |
+| Custom HTML | `bookmarks.html`, `history.html` | кнопки в секции «Страницы» |
+| DevTools page + panel | `devtools.html` → `panel.html` | открыть DevTools (F12) → вкладка **Tester** |
+| Content script | `content.js` | зайти на любой http/https сайт — появится баннер |
+| Sandbox page | `sandbox.html` (+ host `sandbox-host.html`) | кнопка «sandbox host» |
+
+⚠️ **Override может быть только один на расширение.** Сейчас занят `newtab`.
+Чтобы заменить менеджер закладок или историю — поменяй ключ в
+`chrome_url_overrides` (`bookmarks` / `history`) вместо `newtab`.
+
 ## Файлы
 
-- `manifest.json` — MV3, permission `tabs`, service worker, options page.
+- `manifest.json` — MV3: `tabs` + `sidePanel`, host permissions, service worker,
+  options, side_panel, newtab override, devtools, content script, sandbox.
 - `background.js` — `setUninstallURL`, роутер сообщений.
-- `popup.html` / `popup.css` / `popup.js` — UI и вызовы API.
-- `options.html` — страница для `openOptionsPage`.
+- `popup.html` / `popup.css` / `popup.js` — UI, вызовы API, открытие страниц.
+- `options.html`, `sidepanel.html`, `newtab.html`, `bookmarks.html`,
+  `history.html` — страницы расширения.
+- `devtools.html` / `devtools.js` / `panel.html` / `panel.js` — DevTools-панель.
+- `content.js` — content script (баннер на страницах).
+- `sandbox.html` / `sandbox-host.html` / `sandbox-host.js` — sandbox + демо postMessage.
