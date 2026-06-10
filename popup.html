@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tabs &amp; Windows Tester</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <h1>Tabs &amp; Windows Tester</h1>
+
+  <div class="row">
+    <label>URL <input id="url" type="text" value="https://example.com" /></label>
+  </div>
+
+  <section>
+    <h2>on_extension_open_tab</h2>
+    <button data-action="tabs.create">tabs.create</button>
+    <button data-action="tabs.duplicate">tabs.duplicate</button>
+    <button data-action="openOptionsPage">openOptionsPage</button>
+    <button data-action="showUninstallURL">setUninstallURL (показать)</button>
+  </section>
+
+  <section>
+    <h2>on_extension_open_window</h2>
+    <button data-action="windows.create">windows.create</button>
+  </section>
+
+  <section>
+    <h2>on_extension_navigate_tab</h2>
+    <button data-action="tabs.update.url">tabs.update (url, CURRENT_TAB)</button>
+  </section>
+
+  <section>
+    <h2>on_extension_activate_tab</h2>
+    <button data-action="tabs.update.active">tabs.update (active:true)</button>
+    <button data-action="tabs.highlight">tabs.highlight</button>
+  </section>
+
+  <section>
+    <h2>on_extension_move_tab</h2>
+    <button data-action="tabs.move.index">tabs.move (в начало)</button>
+    <button data-action="tabs.move.window">tabs.move (в новое окно)</button>
+  </section>
+
+  <section>
+    <h2>on_extension_close_tab</h2>
+    <button data-action="tabs.remove">tabs.remove (активную)</button>
+  </section>
+
+  <section>
+    <h2>on_extension_update_window</h2>
+    <button data-action="windows.update.focus">windows.update (focus)</button>
+    <button data-action="windows.update.state">windows.update (maximized)</button>
+    <button data-action="windows.update.bounds">windows.update (bounds)</button>
+  </section>
+
+  <section>
+    <h2>on_extension_close_window</h2>
+    <button data-action="windows.remove">windows.remove (текущее)</button>
+  </section>
+
+  <pre id="log" aria-live="polite"></pre>
+
+  <script src="popup.js"></script>
+</body>
+</html>

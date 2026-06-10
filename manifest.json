@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Tabs & Windows Function Tester",
+  "version": "1.0.0",
+  "description": "Testbench for chrome.tabs / chrome.windows actions: open/navigate/activate/move/close tabs and windows.",
+  "permissions": ["tabs"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_page": "options.html",
+  "action": {
+    "default_title": "Tabs & Windows Tester",
+    "default_popup": "popup.html"
+  }
+}
